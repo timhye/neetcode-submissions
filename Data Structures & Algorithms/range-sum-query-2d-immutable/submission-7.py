@@ -1,0 +1,15 @@
+class NumMatrix:
+
+    def __init__(self, matrix: List[List[int]]):
+        self.rec = [[0] * (len(matrix[0]) + 1) for _ in range(len(matrix) + 1)]
+        for i in range(1,len(matrix) + 1):
+            for j in range(1,len(matrix[0]) + 1):
+                self.rec[i][j] = matrix[i - 1][j - 1] + self.rec[i-1][j] + self.rec[i][j - 1] - self.rec[i - 1][j - 1]
+
+        print(self.rec)
+    def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
+        return (self.rec[row2][col2] - self.rec[row1 - 1][row2] - self.rec[row2][col1 - 1] + self.rec[row1-1][col1-1])
+
+# Your NumMatrix object will be instantiated and called as such:
+# obj = NumMatrix(matrix)
+# param_1 = obj.sumRegion(row1,col1,row2,col2)

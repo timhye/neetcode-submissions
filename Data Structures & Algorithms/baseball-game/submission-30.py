@@ -1,0 +1,26 @@
+class Solution:
+    def calPoints(self, operations: List[str]) -> int:
+        stk = []
+        for operation in operations:
+            if operation.isnumeric():
+                stk.append(int(operation))
+            
+            elif operation[1:].isnumeric():
+                stk.append(int(operation))
+
+            elif operation == "+":
+                if stk and len(stk) > 1:
+                    itm = stk[-1] + stk[-2]
+                    stk.append(itm)
+            
+            elif operation == "D":
+                if stk:
+                    itm = stk[-1] * 2
+                    stk.append(itm)
+            
+            else:
+                if stk:
+                    stk.pop()
+                
+
+        return sum(stk)

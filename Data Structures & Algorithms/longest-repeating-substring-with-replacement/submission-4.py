@@ -1,0 +1,20 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        left = 0 
+        rec = defaultdict(int)
+        maxfreq = 0
+        maxlength = 0
+        for right in range(len(s)):
+            rec[s[right]] += 1
+            maxfreq = max(maxfreq, rec[s[right]])
+            
+            while (right - left + 1) - max(rec.values())> k:
+                rec[s[left]] -= 1
+                left += 1
+            
+            maxlength = max(maxlength, right - left + 1)
+
+        
+        return maxlength
+
+             

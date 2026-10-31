@@ -1,0 +1,33 @@
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        nums.sort()
+        seen = []
+        if len(nums) < 4:
+            return [[]]
+        for i in range(len(nums)-3):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            for j in range(i + 1,len(nums)-2):
+                if j > i + 1 and nums[j] == nums[j -1]:
+                    continue
+                temp = target - (nums[i] + nums[j])
+                l = j + 1
+                r = len(nums) -1
+                while l < r:
+                    total = nums[l] + nums[r]
+                    if total == temp:
+                        seen.append([nums[i],nums[j],nums[l],nums[r]])
+                        l += 1
+                        r -= 1
+                        while nums[i] == nums[i - 1]:
+                            l += 1
+                        while nums[r] == nums[r + 1]:
+                            r -= 1
+                    if total < temp:
+                        l += 1
+                    if total > temp:
+                        r -= 1 
+
+        return seen
+            
+            
